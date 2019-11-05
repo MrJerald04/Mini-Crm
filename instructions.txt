@@ -1,0 +1,36 @@
+Instruction to setup Scheduled Email
+1. Run Task Scheduler
+	- Type Task Scheduler in Windows 10 Search and run it.
+
+2. (Create a new task) in the right side of Task Scheduler
+	- Give it a name. Select Run only when the user is logged on and check Hidden to make sure you command line 
+		won�t popup every single minute when scheduler runs your task. Select Windows 10 or your preferred 
+		platform from Configure for drop-down options and click ok.
+
+3. Create a new Trigger for your Task
+	- Switch to Trigger tab and click on new to create a trigger for your task. Select Daily and set enter 
+		365 in Recur every days input field. Now move to advance settings and check Repeat task every option and 
+		choose 5 minutes from the drop-down. After doing that edit 5 minutes text to 1 minute. Choose Indefinitely 
+		for the duration and check enabled. Click OK to move on to next step.
+
+4. Create Actions for your Task
+	- Switch to Actions tab and click on new to create actions for your task. Select Start a Program from the drop-down. 
+		In Program/Script input enter your PHP installation path which in my case is C:\xampp\php\php.exe  
+		In Add Arguments option enter the path to your projects artisan file which in my case is 
+		C:\xampp\htdocs\mini-crm\artisan schedule:run  Click ok to save your action.
+
+5. Task Settings
+	- Switch to the Settings tab. Check Run task as soon as possible after a scheduled start is missed and click ok to save.
+
+Note: If every step went smoothly, then you have successfully created a task that triggers every minute. 
+	To check if your task is running, find your task in Task scheduler library list and validate last run time.
+
+
+
+Seeder and Factory
+	- If the companies and employees not shown in the map after the seeder and factory run, it's because
+		the seeder and factory didn't save a latitude and longitude for each company and employees.
+		- It will work if you manually add company or employee using the mini-crm website.
+
+	- The same in recieving notification for all existing employee under the company. It will not work
+		if you use seeder and factoy.
