@@ -83,7 +83,7 @@ class CompanyController extends Controller
         //send an 
         $fromEmail = 'jeralddelacruz004@gmail.com';
         $companyName = $request->input('name');
-        // Mail::to('hanszerodii@gmail.com')->send(new MailtrapExample($fromEmail, $companyName)); 
+        Mail::to('hanszerodii@gmail.com')->send(new MailtrapExample($fromEmail, $companyName)); 
 
         // add company
         $company = new Company();
