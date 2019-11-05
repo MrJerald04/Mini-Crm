@@ -1,2 +1,3 @@
-#Admin Lte Theme
-I use bower to install admin-lte theme.
+## Admin LTE
+
+I use Bower to install Admin LTE theme
