@@ -52,6 +52,11 @@ Route::prefix('employee')->group(function(){
 
     Route::post('/companies/{id}', 'Admin\CompanyController@destroyCompanyAndEmployee');
 //----
-Auth::routes();
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+    ]);
+
 
 
