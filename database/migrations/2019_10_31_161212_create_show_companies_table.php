@@ -16,7 +16,7 @@ class CreateShowCompaniesTable extends Migration
         Schema::create('show_companies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('company_id')->nullable();
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            // $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->float('lat', 8, 3);
             $table->float('lng', 8, 3);
             $table->timestamps();

@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(EmployeeSeeder::class);
 
-        DB::table('users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('password'),
-        ]);
+        // DB::table('users')->insert([
+        //     'name' => 'admin',
+        //     'email' => 'admin@admin.com',
+        //     'password' => bcrypt('password'),
+        // ]);
 
         
     }

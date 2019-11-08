@@ -16,7 +16,7 @@ class CreateShowEmployeesTable extends Migration
         Schema::create('show_employees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('employee_id')->nullable()->unsigned();
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+            // $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->float('lat', 8, 3);
             $table->float('lng', 8, 3);
             $table->timestamps();

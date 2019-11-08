@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignKeyCountryIdToEmployees extends Migration
+class AddCompanyIdToEmployees extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddForeignKeyCountryIdToEmployees extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->unsignedInteger('country_id')->nullable()->after('id');
-            // $table->foreign('country_id')->references('id')->on('countries');
+            $table->unsignedInteger('company_id')->nullable()->after('id');
         });
     }
 

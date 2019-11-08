@@ -17,10 +17,10 @@ class AddForeignKeyCountryIdToCompanies extends Migration
             $table->unsignedInteger('country_id')->nullable()->after('id');
 
         });
-        Schema::table('companies', function (Blueprint $table) {
+        // Schema::table('companies', function (Blueprint $table) {
            
-            $table->foreign('country_id')->references('id')->on('countries');
-        });
+        //     $table->foreign('country_id')->references('id')->on('countries');
+        // });
     }
 
     /**
