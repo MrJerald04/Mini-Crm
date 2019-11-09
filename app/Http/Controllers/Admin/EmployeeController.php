@@ -63,6 +63,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request, [
             'lastname' => 'required',
             'firstname' => 'required'
@@ -98,42 +99,44 @@ class EmployeeController extends Controller
                     $emp->save();
                 }
             }
+            if ($request->input('country') != null) {
+                // store location
+                $country = Country::find($request->input('country'));
+                $cLat = $country->latitude;
+                $cLng = $country->longitude;
+                $radius = rand(1,20); // in miles
+                $lng_min = $cLng - $radius / abs(cos(deg2rad($cLat)) * 69);
+                $lng_max = $cLng + $radius / abs(cos(deg2rad($cLat)) * 69);
+                $lat_min = $cLat - ($radius / 69);
+                $lat_max = $cLat + ($radius / 69);
 
-            // store location
-            $country = Country::find($request->input('country'));
-            $cLat = $country->latitude;
-            $cLng = $country->longitude;
-            $radius = rand(1,20); // in miles
-            $lng_min = $cLng - $radius / abs(cos(deg2rad($cLat)) * 69);
-            $lng_max = $cLng + $radius / abs(cos(deg2rad($cLat)) * 69);
-            $lat_min = $cLat - ($radius / 69);
-            $lat_max = $cLat + ($radius / 69);
+                $randTypeLat = rand(1,2);
+                $randTypeLng = rand(1,2);
+                
+                $latTemp = 0;
+                $lngTemp = 0;
 
-            $randTypeLat = rand(1,2);
-            $randTypeLng = rand(1,2);
+                if ($randTypeLat == 1) {
+                    $latTemp = $lat_min;
+                }else{
+                    $latTemp = $lat_max;
+                }
+                if ($randTypeLng == 1) {
+                    $lngTemp = $lng_min;
+                }else{
+                    $lngTemp = $lng_max;
+                }
+
+                $lat = Str::substr($latTemp, 0, 8);
+                $lng = Str::substr($lngTemp, 0, 8);
+
+                $showEmployee = new ShowEmployee();
+                $showEmployee->employee_id = $lastInsertedEmployeeId;
+                $showEmployee->lat = $lat;
+                $showEmployee->lng = $lng;
+                $showEmployee->save();
+            }
             
-            $latTemp = 0;
-            $lngTemp = 0;
-
-            if ($randTypeLat == 1) {
-                $latTemp = $lat_min;
-            }else{
-                $latTemp = $lat_max;
-            }
-            if ($randTypeLng == 1) {
-                $lngTemp = $lng_min;
-            }else{
-                $lngTemp = $lng_max;
-            }
-
-            $lat = Str::substr($latTemp, 0, 8);
-            $lng = Str::substr($lngTemp, 0, 8);
-
-            $showEmployee = new ShowEmployee();
-            $showEmployee->employee_id = $lastInsertedEmployeeId;
-            $showEmployee->lat = $lat;
-            $showEmployee->lng = $lng;
-            $showEmployee->save();
 
             return redirect('/admin/employees')->with('success', 'New Employee Added');
         }
@@ -166,7 +169,13 @@ class EmployeeController extends Controller
 
         $companyList = Company::all();
 
-        $country = Country::find($employee->country_id);
+        $country = '';
+        $country_data = Country::find($employee->country_id);
+        if ($country_data != null) {
+            $country = $country_data->name;
+        }else{
+            $country = 'No Country';
+        }
         $countryList = Country::all();
 
         return view('admin.employees-show')->with(['country' => $country, 'countriesList' => $countryList, 'employee' => $employee,'company' => $company, 'company_null' => $company_null, 'companiesList' => $companyList, 'user' => $user]);
