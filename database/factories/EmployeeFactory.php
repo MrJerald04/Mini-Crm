@@ -13,7 +13,6 @@ $factory->define(Employee::class, function (Faker $faker) {
         'company_id' => $faker->numberBetween($min = 1, $max = 99),
         'email' => $faker->unique()->safeEmail,
         'password' => bcrypt('password'),
-        'phone' => $faker->e164PhoneNumber,
-        'remember_token' => Str::random(10),
+        'phone' => $faker->e164PhoneNumber
     ];
 });
