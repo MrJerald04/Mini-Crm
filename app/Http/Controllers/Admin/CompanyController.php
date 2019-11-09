@@ -258,9 +258,17 @@ class CompanyController extends Controller
         $lng = Str::substr($lngTemp, 0, 8);
 
         $showCompany = ShowCompany::where('company_id', $id)->first();
-        $showCompany->lat = $lat;
-        $showCompany->lng = $lng;
-        $showCompany->save();
+        if ($showCompany != null) {
+            $showCompany->lat = $lat;
+            $showCompany->lng = $lng;
+            $showCompany->save();
+        }else{
+            $addShowCompany = new ShowCompany();
+            $addShowCompany->lat = $lat;
+            $addShowCompany->lng = $lng;
+            $addShowCompany->save();
+        }
+        
 
         return redirect('/admin/companies/'.$id)->with('success', 'Company Updated');
     }
