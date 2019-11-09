@@ -104,8 +104,13 @@ class EmployeeController extends Controller
         }
 
         $companyList = Company::all();
-
-        $country = Country::find($employee->country_id);
+        $country = '';
+        $country_data = Country::find($employee->country_id);
+        if ($country_data != null) {
+            $country = $country_data->name;
+        }else{
+            $country = 'No Country';
+        }
         $countryList = Country::all();
 
         return view('employee.employees-show')->with(['country' => $country, 'countriesList' => $countryList, 'employee' => $employee,'company' => $company, 'company_null' => $company_null, 'companiesList' => $companyList, 'user' => $employee, 'notif' => $notif, 'new_employee_list' => $new_employee_list, 'countOfNotif' => $countOfNotif]);

@@ -64,7 +64,7 @@
                                 <strong><i class="fas fa-globe"></i>&nbsp; Country</strong><br>
                             </div>
                             <div class="col-md-6">
-                                <h5 class="text-success">{{$country->name}}</h5>
+                                <h5 class="text-success">{{session('country')}}</h5>
                             </div>
                         </div>
                     
