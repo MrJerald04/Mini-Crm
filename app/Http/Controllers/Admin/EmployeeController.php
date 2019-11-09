@@ -274,6 +274,7 @@ class EmployeeController extends Controller
             $showEmployee->save();
         }else{
             $addShowEmployee = new ShowEmployee();
+            $addShowEmployee->employee_id = $id;
             $addShowEmployee->lat = $lat;
             $addShowEmployee->lng = $lng;
             $addShowEmployee->save();

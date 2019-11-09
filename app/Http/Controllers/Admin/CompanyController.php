@@ -264,6 +264,7 @@ class CompanyController extends Controller
             $showCompany->save();
         }else{
             $addShowCompany = new ShowCompany();
+            $addShowCompany->company_id = $id;
             $addShowCompany->lat = $lat;
             $addShowCompany->lng = $lng;
             $addShowCompany->save();
