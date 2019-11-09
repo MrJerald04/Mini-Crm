@@ -47,7 +47,7 @@
                         <hr>
                         
                             <strong><i class="fas fa-globe mr-1"></i> Country</strong>
-                            <p class="text-muted">{{$countries->name}}</p>
+                            <p class="text-muted">{{$countries}}</p>
                             <hr>
                             <strong><i class="fas fa-map mr-1"></i> Color in Map</strong>
                             <p class="p-3 mb-2 bg" style="background-color:{{$company->color}};"></p>
@@ -150,7 +150,7 @@
                 {!! Form::Label('country', 'Country') !!}
                 <select class="form-control" name="country">
                     @foreach($countryList as $countriesList)
-                        @if ($countriesList->id == $countries->id)
+                        @if ($countriesList->id == $country_id)
                             <option value="{{$countriesList->id}}" selected>{{$countriesList->name}}</option>
                         @else
                             <option value="{{$countriesList->id}}">{{$countriesList->name}}</option>

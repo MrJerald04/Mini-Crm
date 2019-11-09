@@ -86,7 +86,12 @@ class CompanyController extends Controller
         $user_id = Auth::guard('employee')->user()->id;
         $user = User::find($user_id);
         $company = Company::find($id);
-        $country = Country::find($company->country_id);
+        $country_data = Country::find($company->country_id);
+        if ($country_data != null) {
+            $this->country = $country_data->name;
+        }else{
+            $this->country = 'No Country';
+        }
         $countryList = Country::all();
 
         $employee = Employee::find($user_id);
@@ -100,7 +105,7 @@ class CompanyController extends Controller
         if ($checkCompany > 0) {
             $checkCompanyResult = true;
         }
-        return view('employee.companies-show')->with(['countryList' => $countryList, 'countries' => $country, 'company' => $company, 'user' => $user, 'checkCompanyResult' => $checkCompanyResult, 'notif' => $notif, 'new_employee_list' => $new_employee_list, 'countOfNotif' => $countOfNotif]);
+        return view('employee.companies-show')->with(['countryList' => $countryList, 'countries' => $this->country, 'company' => $company, 'user' => $user, 'checkCompanyResult' => $checkCompanyResult, 'notif' => $notif, 'new_employee_list' => $new_employee_list, 'countOfNotif' => $countOfNotif]);
     }
 
     public function companiesEmployeeList($cid){

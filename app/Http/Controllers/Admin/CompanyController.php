@@ -24,6 +24,7 @@ use DataTables;
 
 class CompanyController extends Controller
 {
+    protected $countries_id;
     public function __construct()
     {
         
@@ -148,7 +149,14 @@ class CompanyController extends Controller
         $user_id = Auth::guard('user')->user()->id;
         $user = User::find($user_id);
         $company = Company::find($id);
-        $country = Country::find($company->country_id);
+        $country_data = Country::find($company->country_id);
+        
+        if ($country_data != null) {
+            $this->country = $country_data->name;
+            $this->countries_id = $country_data->id;
+        }else{
+            $this->country = 'No Country';
+        }
         $countryList = Country::all();
         
         $checkCompany = Employee::where('company_id', $id)->count();//check the company if have an employee
@@ -156,7 +164,7 @@ class CompanyController extends Controller
         if ($checkCompany > 0) {
             $checkCompanyResult = true;
         }
-        return view('admin.companies-show')->with(['countryList' => $countryList, 'countries' => $country, 'company' => $company, 'user' => $user, 'checkCompanyResult' => $checkCompanyResult]);
+        return view('admin.companies-show')->with(['countryList' => $countryList, 'countries' => $this->country, 'country_id' => $this->countries_id, 'company' => $company, 'user' => $user, 'checkCompanyResult' => $checkCompanyResult]);
     }
 
     public function companiesEmployeeList($cid){
