@@ -267,9 +267,17 @@ class EmployeeController extends Controller
         $lng = Str::substr($lngTemp, 0, 8);
 
         $showEmployee = ShowEmployee::where('employee_id', $id)->first();
-        $showEmployee->lat = $lat;
-        $showEmployee->lng = $lng;
-        $showEmployee->save();
+        if ($showEmployee != null) {
+            $showEmployee->lat = $lat;
+            $showEmployee->lng = $lng;
+            $showEmployee->save();
+        }else{
+            $addShowEmployee = new ShowEmployee();
+            $addShowEmployee->lat = $lat;
+            $addShowEmployee->lng = $lng;
+            $addShowEmployee->save();
+        }
+        
 
         return redirect('/admin/employees/'.$id)->with('success', 'Employee updated');
     }
