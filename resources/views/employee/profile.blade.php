@@ -57,7 +57,7 @@
                           </div>
                           <div class="form-group">
                               <label>Country</label>
-                              <input type="text" value="{{session('country')}}" class="form-control" placeholder="Enter ..." disabled>
+                              <input type="text" value="{{$country}}" class="form-control" placeholder="Enter ..." disabled>
                           </div>
                           
                         </div>

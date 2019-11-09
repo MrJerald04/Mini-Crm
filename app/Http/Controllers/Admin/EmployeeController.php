@@ -20,6 +20,7 @@ use Redirect;
 
 class EmployeeController extends Controller
 {
+    protected $country;
     /**
      * Display a listing of the resource.
      *
@@ -169,16 +170,16 @@ class EmployeeController extends Controller
 
         $companyList = Company::all();
 
-        $country = '';
+        
         $country_data = Country::find($employee->country_id);
         if ($country_data != null) {
-            $country = $country_data->name;
+            $this->country = $country_data->name;
         }else{
-            $country = 'No Country';
+            $this->country = 'No Country';
         }
         $countryList = Country::all();
 
-        return view('admin.employees-show')->with(['country' => $country, 'countriesList' => $countryList, 'employee' => $employee,'company' => $company, 'company_null' => $company_null, 'companiesList' => $companyList, 'user' => $user]);
+        return view('admin.employees-show')->with(['country' => $this->country, 'countriesList' => $countryList, 'employee' => $employee,'company' => $company, 'company_null' => $company_null, 'companiesList' => $companyList, 'user' => $user]);
         
     }
 

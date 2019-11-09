@@ -129,8 +129,14 @@ class PageController extends Controller
         $countOfNotif = $notif->count();
 
         $employee_company_name = Company::where('id', $employee->company_id)->first();
-        $country = Country::where('id', $employee->country_id)->first();
-        return view('employee.profile')->with(['user' => $employee, 'notif' => $notif, 'new_employee_list' => $new_employee_list, 'countOfNotif' => $countOfNotif, 'employee_company_name' => $employee_company_name, 'country' => $country]);
+        
+        $country_data = Country::where('id', $employee->country_id)->first();
+        if ($country_data != null) {
+            $this->country = $country_data->name;
+        }else{
+            $this->country = 'No Country';
+        }
+        return view('employee.profile')->with(['user' => $employee, 'notif' => $notif, 'new_employee_list' => $new_employee_list, 'countOfNotif' => $countOfNotif, 'employee_company_name' => $employee_company_name, 'country' => $this->country]);
     }
 
 }
