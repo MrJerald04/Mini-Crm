@@ -49,7 +49,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                               <label>Company</label>
-                              <input type="text" value="{{$employee_company_name->name}}" class="form-control" placeholder="Enter ..." disabled>
+                              <input type="text" value="{{$employee_company_name}}" class="form-control" placeholder="Enter ..." disabled>
                           </div>
                           <div class="form-group">
                               <label>Phone</label>
