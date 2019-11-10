@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -44,16 +45,21 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6'
         ]);
-        //attemp to user in // user is admin
-        if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password, 'remember_token' => $request->remember])) {
-            //if successful the redirect to intended location
-            return redirect()->intended(route('admin.dashboard'))->with('name', Auth::guard('user')->user()->name);
+        if (User::all()) {
+            //attemp to user in // user is admin
+            if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password, 'remember_token' => $request->remember])) {
+                //if successful the redirect to intended location
+                return redirect()->intended(route('admin.dashboard'))->with('name', Auth::guard('user')->user()->name);
+            }
+            if (Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password, 'remember_token' => $request->remember])) {
+                //if successful the redirect to intended location
+                return redirect()->intended(route('employee.dashboard'))->with('name', Auth::guard('employee')->user()->first_name);
+            }
+            // if unsuccessful the redirect back
+            return redirect()->back()->withInput($request->only('email', 'remember'))->with('login_error', 'Your Email/Password is incorrect');
+        }else{
+            return redirect()->back()->with('login_error', 'Your account does not exist');
         }
-        if (Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password, 'remember_token' => $request->remember])) {
-            //if successful the redirect to intended location
-            return redirect()->intended(route('employee.dashboard'))->with('name', Auth::guard('employee')->user()->first_name);
-        }
-        // if unsuccessful the redirect back
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        
     }
 }

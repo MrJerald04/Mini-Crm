@@ -8,6 +8,13 @@
             <div class="p-5">
                     <h1 class="text-center text-white"><strong>Mini-CRM</strong></h1>
             </div>
+            @if (session('login_error'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5><i class="icon fas fa-ban"></i> Oops!</h5>
+                    {{session('login_error')}}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-user"></i> Login
