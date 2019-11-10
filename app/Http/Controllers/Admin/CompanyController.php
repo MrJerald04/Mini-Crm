@@ -84,7 +84,7 @@ class CompanyController extends Controller
         //send an 
         $fromEmail = 'jeralddelacruz004@gmail.com';
         $companyName = $request->input('name');
-        Mail::to('hanszerodii@gmail.com')->send(new MailtrapExample($fromEmail, $companyName)); 
+        // Mail::to('hanszerodii@gmail.com')->send(new MailtrapExample($fromEmail, $companyName)); 
 
         // add company
         $company = new Company();
@@ -98,40 +98,41 @@ class CompanyController extends Controller
 
         // store location
         $country = Country::find($request->input('country'));
-        $cLat = $country->latitude;
-        $cLng = $country->longitude;
-        $radius = rand(1,20); // in miles
-        $lng_min = $cLng - $radius / abs(cos(deg2rad($cLat)) * 69);
-        $lng_max = $cLng + $radius / abs(cos(deg2rad($cLat)) * 69);
-        $lat_min = $cLat - ($radius / 69);
-        $lat_max = $cLat + ($radius / 69);
+        if ($country != null) {
+            $cLat = $country->latitude;
+            $cLng = $country->longitude;
+            $radius = rand(1,20); // in miles
+            $lng_min = $cLng - $radius / abs(cos(deg2rad($cLat)) * 69);
+            $lng_max = $cLng + $radius / abs(cos(deg2rad($cLat)) * 69);
+            $lat_min = $cLat - ($radius / 69);
+            $lat_max = $cLat + ($radius / 69);
 
-        $randTypeLat = rand(1,2);
-        $randTypeLng = rand(1,2);
-        
-        $latTemp = 0;
-        $lngTemp = 0;
+            $randTypeLat = rand(1,2);
+            $randTypeLng = rand(1,2);
+            
+            $latTemp = 0;
+            $lngTemp = 0;
 
-        if ($randTypeLat == 1) {
-            $latTemp = $lat_min;
-        }else{
-            $latTemp = $lat_max;
+            if ($randTypeLat == 1) {
+                $latTemp = $lat_min;
+            }else{
+                $latTemp = $lat_max;
+            }
+            if ($randTypeLng == 1) {
+                $lngTemp = $lng_min;
+            }else{
+                $lngTemp = $lng_max;
+            }
+
+            $lat = Str::substr($latTemp, 0, 8);
+            $lng = Str::substr($lngTemp, 0, 8);
+
+            $showCompany = new ShowCompany();
+            $showCompany->company_id = $company->id;
+            $showCompany->lat = $lat;
+            $showCompany->lng = $lng;
+            $showCompany->save();
         }
-        if ($randTypeLng == 1) {
-            $lngTemp = $lng_min;
-        }else{
-            $lngTemp = $lng_max;
-        }
-
-        $lat = Str::substr($latTemp, 0, 8);
-        $lng = Str::substr($lngTemp, 0, 8);
-
-        $showCompany = new ShowCompany();
-        $showCompany->company_id = $company->id;
-        $showCompany->lat = $lat;
-        $showCompany->lng = $lng;
-        $showCompany->save();
-        
         return redirect('/admin/companies')->with('success', 'New Company Added');
     }
 
