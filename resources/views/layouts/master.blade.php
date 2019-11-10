@@ -12,7 +12,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="{{asset('/bower_components/admin-lte/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css')}}">
+  <link rel="stylesheet" href="{{asset('/bower_components/admin-lte/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css')}}">
   <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="{{asset('/bower_components/admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
   <!-- Select2 -->
@@ -80,8 +80,6 @@
 <!-- DataTables -->
 <script src="{!! asset('/bower_components/admin-lte/plugins/datatables/jquery.dataTables.js') !!}"></script>
 <script src="{!! asset('/bower_components/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') !!}"></script>
-<!-- Color picker -->
-<script src="{!! asset('/bower_components/admin-lte/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') !!}"></script>
 <!-- Googlemap -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmwTFmrPrYrV9_1yGsjxxqXeHTO_cjEgE&libraries=places"></script>
 <!-- Toast -->
