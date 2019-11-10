@@ -61,6 +61,8 @@
 
 <!-- jQuery -->
 <script src="{{asset('/bower_components/admin-lte/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Script to support get function in map jquery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('/bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Select2 -->
@@ -75,8 +77,7 @@
 <script src="{{asset('/bower_components/admin-lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('/bower_components/admin-lte/dist/js/adminlte.min.js')}}"></script>
-<!-- Script to support get function in map jquery -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <!-- DataTables -->
 <script src="{!! asset('/bower_components/admin-lte/plugins/datatables/jquery.dataTables.js') !!}"></script>
 <script src="{!! asset('/bower_components/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') !!}"></script>
